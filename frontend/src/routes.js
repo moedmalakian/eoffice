@@ -44,6 +44,7 @@ import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import Division from "layouts/division";
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -101,7 +102,6 @@ const routes = [
     component: <RTL />,
     noCollapse: true,
   },
-  { type: "title", title: "Account Pages", key: "account-pages" },
   {
     type: "collapse",
     name: "Profile",
@@ -127,6 +127,15 @@ const routes = [
     route: "/authentication/sign-up",
     icon: <SpaceShip size="12px" />,
     component: <SignUp />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Division",
+    key: "division",
+    route: "/division",
+    icon: <Cube size="12px" />,
+    component: <Division />,
     noCollapse: true,
   },
 ];
