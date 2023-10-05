@@ -15,6 +15,7 @@ import Table from "examples/Tables/Table";
 
 // React
 import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 function Tables() {
   const [divisionData, setDivisionData] = useState([]);
@@ -35,7 +36,6 @@ function Tables() {
       });
   }, [loading]);
 
-  
   return (
     <DashboardLayout>
       <DashboardNavbar />
