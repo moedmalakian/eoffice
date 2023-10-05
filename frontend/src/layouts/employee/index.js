@@ -17,16 +17,16 @@ import Table from "examples/Tables/Table";
 import React, { useState, useEffect } from 'react';
 
 function Tables() {
-  const [divisionData, setDivisionData] = useState([]);
+  const [employeeData, setemployeeData] = useState([]);
   const [loading, setLoading] = useState(true); // Add a loading state
 
   useEffect(() => {
     // setLoading(true);
     // Fetch data from the API
-    fetch('http://localhost:3001/division/')
+    fetch('http://localhost:3001/employee/')
       .then((response) => response.json())
       .then((response) => {
-        setDivisionData(response.data);
+        setemployeeData(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -43,7 +43,7 @@ function Tables() {
         <SoftBox mb={3}>
           <Card>
             <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-              <SoftTypography variant="h6">Master Data - Division</SoftTypography>
+              <SoftTypography variant="h6">Master Data - Employee</SoftTypography>
             </SoftBox>
             {/* {loading ? (
               <div>Loading...</div>
@@ -51,18 +51,20 @@ function Tables() {
             <Table
               columns={[
                 { name: "no", align: "center" },
-                { name: "division code", align: "center" },
-                { name: "division name", align: "center" },
+                { name: "full name", align: "center" },
+                { name: "position", align: "center" },
+                { name: "division", align: "center" },
                 { name: "created date", align: "center" },
                 { name: "created by", align: "center" },
                 { name: "action", align: "center" },
               ]}
-              rows={Array.isArray(divisionData) ? divisionData.map((data, index) => ({
+              rows={Array.isArray(employeeData) ? employeeData.map((data, index) => ({
                 "no": index + 1,
-                "division code": data.divisionCode.toUpperCase(),
-                "division name": data.divisionName.toUpperCase(),
-                "created date": data.createdDate.toUpperCase(),
-                "created by": data.createdBy.toUpperCase(),
+                "full name": data.fullName,
+                "position": data.positionName,
+                "division": data.divisionName,
+                "created date": data.createdDate,
+                "created by": data.createdBy,
                 "action": "x",
               })) : []}
             />

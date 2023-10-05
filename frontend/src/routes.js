@@ -45,6 +45,10 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Division from "layouts/division";
+import Employee from "layouts/employee";
+import Position from "layouts/position";
+
+
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -136,6 +140,24 @@ const routes = [
     route: "/division",
     icon: <Cube size="12px" />,
     component: <Division />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Employee",
+    key: "employee",
+    route: "/employee",
+    icon: <CustomerSupport size="12px" />,
+    component: <Employee />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Position",
+    key: "position",
+    route: "/position",
+    icon: <Document size="12px" />,
+    component: <Position />,
     noCollapse: true,
   },
 ];
