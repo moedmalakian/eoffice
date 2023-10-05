@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 26, 2023 at 06:37 PM
+-- Generation Time: Oct 05, 2023 at 02:44 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `eoffice`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance`
+--
+
+CREATE TABLE `attendance` (
+  `att_id` int(30) NOT NULL,
+  `use_id` int(30) NOT NULL,
+  `div_id` int(30) NOT NULL,
+  `pos_id` int(30) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `attendance` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `remarks` varchar(255) NOT NULL,
+  `qty` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -77,6 +98,114 @@ INSERT INTO `employee` (`emp_id`, `fullname`, `gender`, `birthday`, `family`, `d
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `eve_id` int(30) NOT NULL,
+  `event_code` varchar(30) NOT NULL,
+  `event_name` varchar(255) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `remarks` varchar(255) NOT NULL,
+  `qty` varchar(255) NOT NULL,
+  `approval_date` datetime NOT NULL,
+  `approval_by` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `object`
+--
+
+CREATE TABLE `object` (
+  `obj_id` int(30) NOT NULL,
+  `object_name` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `outgoing_work`
+--
+
+CREATE TABLE `outgoing_work` (
+  `out_id` int(30) NOT NULL,
+  `emp_id` int(30) NOT NULL,
+  `pos_id` int(30) NOT NULL,
+  `div_id` int(30) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `project` varchar(255) NOT NULL,
+  `agenda` varchar(255) NOT NULL,
+  `remarks` varchar(255) NOT NULL,
+  `qty` varchar(255) NOT NULL,
+  `nominal_1` varchar(255) NOT NULL,
+  `nominal_2` varchar(255) NOT NULL,
+  `nominal_3` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `approval_date` datetime NOT NULL,
+  `approval_by` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `overtime`
+--
+
+CREATE TABLE `overtime` (
+  `ove_id` int(30) NOT NULL,
+  `emp_id` int(30) NOT NULL,
+  `pos_id` int(30) NOT NULL,
+  `div_id` int(30) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `project` varchar(255) NOT NULL,
+  `remarks` varchar(255) NOT NULL,
+  `qty` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `approval_date` datetime NOT NULL,
+  `approval_by` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payroll`
+--
+
+CREATE TABLE `payroll` (
+  `pay_id` int(30) NOT NULL,
+  `emp_id` int(30) NOT NULL,
+  `pos_id` int(30) NOT NULL,
+  `div_id` int(30) NOT NULL,
+  `salary` varchar(255) NOT NULL,
+  `onl_id` int(30) NOT NULL,
+  `ove_id` int(30) NOT NULL,
+  `out_id` int(30) NOT NULL,
+  `nominal_1` varchar(255) NOT NULL,
+  `nominal_2` varchar(255) NOT NULL,
+  `nominal_3` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `remarks` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `position`
 --
 
@@ -95,6 +224,53 @@ CREATE TABLE `position` (
 INSERT INTO `position` (`pos_id`, `position_code`, `position_name`, `created_date`, `created_by`) VALUES
 (1, 'DEV', 'DEVELOPER', '2023-09-01 00:00:00', 'SYSTEM'),
 (2, 'QUA', 'QUALITY ASSURANCE', '2023-09-01 00:00:00', 'SYSTEM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role`
+--
+
+CREATE TABLE `role` (
+  `rol_id` int(30) NOT NULL,
+  `use_id` int(30) NOT NULL,
+  `obj_id` int(30) NOT NULL,
+  `role_name` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_object`
+--
+
+CREATE TABLE `role_object` (
+  `rob_id` int(30) NOT NULL,
+  `obj_id` int(30) NOT NULL,
+  `role_name` varchar(255) NOT NULL,
+  `object_name` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `use_id` int(30) NOT NULL,
+  `emp_id` int(30) NOT NULL,
+  `rol_id` int(30) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `created_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
