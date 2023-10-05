@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
         const dataResult = result.map(data => {
             const formattedCreatedDate = moment(data.created_date).format('DD-MM-YYYY HH:mm:ss');
             return {
-                posId: data.pos_id,
+                divId: data.div_id,
                 divisionCode: data.division_code,
                 divisionName: data.division_name,
                 createdDate: formattedCreatedDate,
@@ -30,10 +30,10 @@ router.get('/', (req, res, next) => {
 })
 
 //GET DATA BY ID
-router.get('/:div_id', (req, res, next) => {
-    const div_id = req.params.div_id;
+router.get('/:divId', (req, res, next) => {
+    const divId = req.params.divId;
     
-    var sql = "SELECT * FROM division WHERE div_id="+div_id;
+    var sql = "SELECT * FROM division WHERE div_id="+divId;
     
     db.query(sql, (err, result) => {
         if (err) throw err;
@@ -41,7 +41,7 @@ router.get('/:div_id', (req, res, next) => {
         const dataResult = result.map(data => {
             const formattedCreatedDate = moment(data.created_date).format('DD-MM-YYYY HH:mm:ss');
             return {
-                posId: data.pos_id,
+                divId: data.div_id,
                 divisionCode: data.division_code,
                 divisionName: data.division_name,
                 createdDate: formattedCreatedDate,
@@ -101,7 +101,7 @@ router.put('/', (req, res, next) => {
 })
 
 //DELETE DATA
-router.delete('/:div_id', (req, res, next) => {
+router.delete('/:divId', (req, res, next) => {
     const divId = req.params.divId;
 
     var sql = "DELETE FROM division WHERE div_id = "+divId;

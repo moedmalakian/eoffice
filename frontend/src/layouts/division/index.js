@@ -4,8 +4,7 @@ import Card from "@mui/material/Card";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
-import SoftAvatar from "components/SoftAvatar";
-import SoftBadge from "components/SoftBadge";
+import SoftButton from "components/SoftButton";
 
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -19,22 +18,19 @@ import axios from "axios";
 
 function Tables() {
   const [divisionData, setDivisionData] = useState([]);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // setLoading(true);
-    // Fetch data from the API
-    fetch('http://localhost:3001/division/')
-      .then((response) => response.json())
+    axios.get('http://localhost:3001/division/') 
       .then((response) => {
-        setDivisionData(response.data);
+        setDivisionData(response.data.data); 
         setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
         setLoading(false);
       });
-  }, [loading]);
+  }, []);
 
   return (
     <DashboardLayout>
@@ -45,9 +41,6 @@ function Tables() {
             <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
               <SoftTypography variant="h6">Master Data - Division</SoftTypography>
             </SoftBox>
-            {/* {loading ? (
-              <div>Loading...</div>
-            ) : ( */}
             <Table
               columns={[
                 { name: "no", align: "center" },
@@ -63,10 +56,24 @@ function Tables() {
                 "division name": data.divisionName.toUpperCase(),
                 "created date": data.createdDate.toUpperCase(),
                 "created by": data.createdBy.toUpperCase(),
-                "action": "x",
+                "action": 
+                <ul>
+                  <SoftBox>
+                  <a href={`http://localhost:3001/division/${data.divId}`}>
+                    <SoftButton variant="text" color="secondary">
+                      view
+                    </SoftButton>
+                  </a>
+                    <SoftButton variant="text" color="info">
+                      edit
+                    </SoftButton>
+                    <SoftButton variant="text" color="error">
+                      delete
+                    </SoftButton>
+                  </SoftBox> 
+                </ul> 
               })) : []}
             />
-            {/* )} */}
           </Card>
         </SoftBox>
       </SoftBox>
