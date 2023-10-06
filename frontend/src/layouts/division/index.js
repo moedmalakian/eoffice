@@ -50,29 +50,39 @@ function Tables() {
                 { name: "created by", align: "center" },
                 { name: "action", align: "center" },
               ]}
-              rows={Array.isArray(divisionData) ? divisionData.map((data, index) => ({
-                "no": index + 1,
-                "division code": data.divisionCode.toUpperCase(),
-                "division name": data.divisionName.toUpperCase(),
-                "created date": data.createdDate.toUpperCase(),
-                "created by": data.createdBy.toUpperCase(),
-                "action": 
-                <ul>
-                  <SoftBox>
-                  <a href={`http://localhost:3001/division/${data.divId}`}>
-                    <SoftButton variant="text" color="secondary">
-                      view
-                    </SoftButton>
-                  </a>
-                    <SoftButton variant="text" color="info">
-                      edit
-                    </SoftButton>
-                    <SoftButton variant="text" color="error">
-                      delete
-                    </SoftButton>
-                  </SoftBox> 
-                </ul> 
-              })) : []}
+              rows={Array.isArray(divisionData) ? divisionData.map((data, index) => { 
+                const helper = (text) => {
+                  return text.toLowerCase()
+                }
+                
+                return (
+                  {
+                    "no": index + 1,
+                    "division code": data.divisionCode,
+                    "division name": helper(data.divisionName).charAt(0).toUpperCase() + helper(data.divisionName).slice(1),
+                    "created date": data.createdDate,
+                    "created by": helper(data.createdBy).charAt(0).toUpperCase() + helper(data.createdBy).slice(1),
+                    "action": 
+                      <ul>
+                        <SoftBox>
+                        <a href={`http://localhost:3001/division/${data.divId}`}>
+                          <SoftButton variant="text" color="secondary">
+                            view
+                          </SoftButton>
+                        </a>
+                          <SoftButton variant="text" color="info">
+                            edit
+                          </SoftButton>
+                          <SoftButton variant="text" color="error">
+                            delete
+                          </SoftButton>
+                        </SoftBox> 
+                      </ul> 
+                  }
+                )
+              }) 
+              :
+              []}
             />
           </Card>
         </SoftBox>

@@ -45,6 +45,9 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Division from "layouts/division";
+import DivisionViews from "layouts/division/views";
+import DivisionCreate from "layouts/division/create";
+import DivisionEdit from "layouts/division/edit";
 import Employee from "layouts/employee";
 import Position from "layouts/position";
 
@@ -141,6 +144,26 @@ const routes = [
     icon: <Cube size="12px" />,
     component: <Division />,
     noCollapse: true,
+    // collapse: [
+    //   {
+    //     name: "Views",
+    //     key: "views",
+    //     route: "/division/views",
+    //     component: <DivisionViews />
+    //   },
+    //   {
+    //     name: "Create",
+    //     key: "create",
+    //     route: "/division/create",
+    //     component: <DivisionCreate />
+    //   },
+    //   {
+    //     name: "Edit",
+    //     key: "edit",
+    //     route: "/division/edit",
+    //     component: <DivisionEdit />,
+    //   },
+    // ]
   },
   {
     type: "collapse",
