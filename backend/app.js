@@ -1,7 +1,4 @@
 const express = require('express');
-const moment = require('moment');
-const axios = require('axios');
-const lodash = require('lodash');
 const cors = require('cors');
 const app = express();
 const morgan = require('morgan');

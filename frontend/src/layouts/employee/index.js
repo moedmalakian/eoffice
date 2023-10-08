@@ -15,7 +15,7 @@ import Table from "examples/Tables/Table";
 // React
 import React, { useState, useEffect } from 'react';
 
-function Tables() {
+function Employee() {
   const [employeeData, setEmployeeData] = useState([]);
   const [loading, setLoading] = useState(true); // Add a loading state
 
@@ -102,4 +102,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default Employee;

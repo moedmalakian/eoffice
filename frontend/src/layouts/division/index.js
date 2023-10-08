@@ -16,7 +16,7 @@ import Table from "examples/Tables/Table";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function Tables() {
+function Division() {
   const [divisionData, setDivisionData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -94,4 +94,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default Division;
