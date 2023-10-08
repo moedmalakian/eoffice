@@ -14,7 +14,7 @@ import Table from "examples/Tables/Table";
 
 // React
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+import axios from 'axios';
 
 function Tables() {
   const [divisionData, setDivisionData] = useState([]);
@@ -30,7 +30,7 @@ function Tables() {
         console.error('Error fetching data:', error);
         setLoading(false);
       });
-  }, []);
+  }, [loading]);
 
   return (
     <DashboardLayout>
@@ -51,17 +51,19 @@ function Tables() {
                 { name: "action", align: "center" },
               ]}
               rows={Array.isArray(divisionData) ? divisionData.map((data, index) => { 
-                const helper = (text) => {
-                  return text.toLowerCase()
+                function capitalizeWords(text) {
+                  return text.toLowerCase().replace(/(?:^|\s)\S/g, function(a) {
+                    return a.toUpperCase();
+                  });
                 }
                 
                 return (
                   {
                     "no": index + 1,
                     "division code": data.divisionCode,
-                    "division name": helper(data.divisionName).charAt(0).toUpperCase() + helper(data.divisionName).slice(1),
+                    "division name": capitalizeWords(data.divisionName),
                     "created date": data.createdDate,
-                    "created by": helper(data.createdBy).charAt(0).toUpperCase() + helper(data.createdBy).slice(1),
+                    "created by": capitalizeWords(data.createdBy),
                     "action": 
                       <ul>
                         <SoftBox>

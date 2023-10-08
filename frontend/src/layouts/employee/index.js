@@ -4,8 +4,7 @@ import Card from "@mui/material/Card";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
-import SoftAvatar from "components/SoftAvatar";
-import SoftBadge from "components/SoftBadge";
+import SoftButton from "components/SoftButton";
 
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -17,7 +16,7 @@ import Table from "examples/Tables/Table";
 import React, { useState, useEffect } from 'react';
 
 function Tables() {
-  const [employeeData, setemployeeData] = useState([]);
+  const [employeeData, setEmployeeData] = useState([]);
   const [loading, setLoading] = useState(true); // Add a loading state
 
   useEffect(() => {
@@ -26,7 +25,7 @@ function Tables() {
     fetch('http://localhost:3001/employee/')
       .then((response) => response.json())
       .then((response) => {
-        setemployeeData(response.data);
+        setEmployeeData(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -58,17 +57,43 @@ function Tables() {
                 { name: "created by", align: "center" },
                 { name: "action", align: "center" },
               ]}
-              rows={Array.isArray(employeeData) ? employeeData.map((data, index) => ({
-                "no": index + 1,
-                "full name": data.fullName,
-                "position": data.positionName,
-                "division": data.divisionName,
-                "created date": data.createdDate,
-                "created by": data.createdBy,
-                "action": "x",
-              })) : []}
+              rows={Array.isArray(employeeData) ? employeeData.map((data, index) => { 
+                function capitalizeWords(text) {
+                  return text.toLowerCase().replace(/(?:^|\s)\S/g, function(a) {
+                    return a.toUpperCase();
+                  });
+                }
+                
+                return (
+                  {
+                    "no": index + 1,
+                    "full name": capitalizeWords(data.fullName),
+                    "position": capitalizeWords(data.positionName),
+                    "division": capitalizeWords(data.divisionName),
+                    "created date": data.createdDate,
+                    "created by": capitalizeWords(data.createdBy),
+                    "action": 
+                      <ul>
+                        <SoftBox>
+                        <a href={`http://localhost:3001/employee/${data.empId}`}>
+                          <SoftButton variant="text" color="secondary">
+                            view
+                          </SoftButton>
+                        </a>
+                          <SoftButton variant="text" color="info">
+                            edit
+                          </SoftButton>
+                          <SoftButton variant="text" color="error">
+                            delete
+                          </SoftButton>
+                        </SoftBox> 
+                      </ul> 
+                  }
+                )
+              }) 
+              :
+              []}
             />
-            {/* )} */}
           </Card>
         </SoftBox>
       </SoftBox>
