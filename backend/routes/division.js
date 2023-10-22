@@ -77,7 +77,6 @@ router.post('/', (req, res, next) => {
         if (err) throw err;
         res.status(200).json({
             message: 'Success Insert Data!',
-
         })
     })
 })

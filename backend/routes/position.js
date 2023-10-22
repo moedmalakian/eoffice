@@ -65,25 +65,25 @@ router.get('/:posId', (req, res, next) => {
 
 //INSERT DATA
 router.post('/', (req, res, next) => {
-    //const posId = req.body.posId;
-    const positionCode = req.body.positionCode;
-    const positionName = req.body.positionName;
-    const createdDate = req.body.createdDate;
-    const createdBy = req.body.createdBy;
-
-    var sql = "INSERT INTO position (position_code, position_name, created_date, created_by) VALUES ('"+positionCode+"', '"+positionName+"', '"+createdDate+"', '"+createdBy+"')";
-
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        res.status(200).json({
-            message: 'Success Insert Data!',
+    //    const posId = req.body.posId;
+        const positionCode = req.body.positionCode;
+        const positionName = req.body.positionName;
+        const createdDate = req.body.createdDate;
+        const createdBy = req.body.createdBy;
+    
+        var sql = "INSERT INTO position (position_code, position_name, created_date, created_by) VALUES ('"+positionCode+"', '"+positionName+"', '"+createdDate+"', '"+createdBy+"')";
+    
+        db.query(sql, (err, result) => {
+            if (err) throw err;
+            res.status(200).json({
+                message: 'Success Insert Data!',
+            })
         })
     })
-})
 
 //UPDATE DATA
 router.put('/', (req, res, next) => {
-    const posId = req.body.posId;
+    // const posId = req.body.posId;
     const positionCode = req.body.positionCode;
     const positionName = req.body.positionName;
     const createdDate = req.body.createdDate;
