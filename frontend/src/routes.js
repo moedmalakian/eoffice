@@ -45,13 +45,11 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Division from "layouts/division";
-import DivisionViews from "layouts/division/views";
-import DivisionCreate from "layouts/division/create";
-import DivisionEdit from "layouts/division/edit";
 import Employee from "layouts/employee";
+import EmployeeCreate from "layouts/employee/create";
+import EmployeeEdit from "layouts/employee/edit";
+import EmployeeDetails from "layouts/employee/details";
 import Position from "layouts/position";
-
-
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -118,24 +116,24 @@ const routes = [
     component: <Profile />,
     noCollapse: true,
   },
-  {
-    type: "collapse",
-    name: "Sign In",
-    key: "sign-in",
-    route: "/authentication/sign-in",
-    icon: <Document size="12px" />,
-    component: <SignIn />,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    route: "/authentication/sign-up",
-    icon: <SpaceShip size="12px" />,
-    component: <SignUp />,
-    noCollapse: true,
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Sign In",
+  //   key: "sign-in",
+  //   route: "/authentication/sign-in",
+  //   icon: <Document size="12px" />,
+  //   component: <SignIn />,
+  //   noCollapse: true,
+  // },
+  // {
+  //   type: "collapse",
+  //   name: "Sign Up",
+  //   key: "sign-up",
+  //   route: "/authentication/sign-up",
+  //   icon: <SpaceShip size="12px" />,
+  //   component: <SignUp />,
+  //   noCollapse: true,
+  // },
   {
     type: "collapse",
     name: "Division",
@@ -144,26 +142,6 @@ const routes = [
     icon: <Cube size="12px" />,
     component: <Division />,
     noCollapse: true,
-    // collapse: [
-    //   {
-    //     name: "Views",
-    //     key: "views",
-    //     route: "/division/views",
-    //     component: <DivisionViews />
-    //   },
-    //   {
-    //     name: "Create",
-    //     key: "create",
-    //     route: "/division/create",
-    //     component: <DivisionCreate />
-    //   },
-    //   {
-    //     name: "Edit",
-    //     key: "edit",
-    //     route: "/division/edit",
-    //     component: <DivisionEdit />,
-    //   },
-    // ]
   },
   {
     type: "collapse",
@@ -171,8 +149,33 @@ const routes = [
     key: "employee",
     route: "/employee",
     icon: <CustomerSupport size="12px" />,
-    component: <Employee />,
-    noCollapse: true,
+    // component: <Employee />,
+    collapse: [
+      {
+        name: "Employee",
+        key: "employee",
+        route: "/employee",
+        component: <Employee />,
+      },
+      {
+        name: "EmployeeCreate",
+        key: "employee",
+        route: "/employee/create",
+        component: <EmployeeCreate />,
+      },
+      {
+        name: "EmployeeEdit",
+        key: "employee",
+        route: "/employee/edit/:id",
+        component: <EmployeeEdit />,
+      },
+      {
+        name: "EmployeeDetails",
+        key: "employee",
+        route: "/employee/details/:id",
+        component: <EmployeeDetails />,
+      }
+    ],
   },
   {
     type: "collapse",

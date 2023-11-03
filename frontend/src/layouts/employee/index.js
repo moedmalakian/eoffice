@@ -1,5 +1,6 @@
 // @mui material components
 import Card from "@mui/material/Card";
+import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -44,6 +45,7 @@ function Employee() {
             <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
               <SoftTypography variant="h6">Master Data - Employee</SoftTypography>
             </SoftBox>
+
             {/* {loading ? (
               <div>Loading...</div>
             ) : ( */}
@@ -75,14 +77,16 @@ function Employee() {
                     "action": 
                       <ul>
                         <SoftBox>
-                        <a href={`http://localhost:3001/employee/${data.empId}`}>
+                        <a href={`http://localhost:3000/employee/details/${data.empId}`}>
                           <SoftButton variant="text" color="secondary">
                             view
                           </SoftButton>
                         </a>
+                        <a href={`http://localhost:3000/employee/edit/${data.empId}`}>
                           <SoftButton variant="text" color="info">
                             edit
                           </SoftButton>
+                        </a>
                           <SoftButton variant="text" color="error">
                             delete
                           </SoftButton>
