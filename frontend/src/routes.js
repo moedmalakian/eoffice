@@ -116,24 +116,6 @@ const routes = [
     component: <Profile />,
     noCollapse: true,
   },
-  // {
-  //   type: "collapse",
-  //   name: "Sign In",
-  //   key: "sign-in",
-  //   route: "/authentication/sign-in",
-  //   icon: <Document size="12px" />,
-  //   component: <SignIn />,
-  //   noCollapse: true,
-  // },
-  // {
-  //   type: "collapse",
-  //   name: "Sign Up",
-  //   key: "sign-up",
-  //   route: "/authentication/sign-up",
-  //   icon: <SpaceShip size="12px" />,
-  //   component: <SignUp />,
-  //   noCollapse: true,
-  // },
   {
     type: "collapse",
     name: "Division",
@@ -149,7 +131,6 @@ const routes = [
     key: "employee",
     route: "/employee",
     icon: <CustomerSupport size="12px" />,
-    // component: <Employee />,
     collapse: [
       {
         name: "Employee",
@@ -159,19 +140,19 @@ const routes = [
       },
       {
         name: "EmployeeCreate",
-        key: "employee",
+        key: "employeeCreate",
         route: "/employee/create",
         component: <EmployeeCreate />,
       },
       {
         name: "EmployeeEdit",
-        key: "employee",
+        key: "employeeEdit",
         route: "/employee/edit/:id",
         component: <EmployeeEdit />,
       },
       {
         name: "EmployeeDetails",
-        key: "employee",
+        key: "employeeDetails",
         route: "/employee/details/:id",
         component: <EmployeeDetails />,
       }
