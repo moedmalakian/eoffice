@@ -1,86 +1,78 @@
 {
-  "name": "soft-ui-dashboard-react",
-  "version": "4.0.1",
-  "author": "Creative Tim",
-  "license": "SEE LICENSE IN <https://www.creative-tim.com/license>",
-  "description": "ReactJS version of Soft UI Dashboard by Creative Tim",
+  "name": "@coreui/coreui-free-react-admin-template",
+  "version": "5.4.0",
+  "description": "CoreUI Free React Admin Template",
+  "homepage": ".",
+  "proxy": "http://localhost:3001",
   "bugs": {
-    "url": "https://github.com/creativetimofficial/soft-ui-dashboard-react/issues"
+    "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/soft-ui-dashboard-react.git"
+    "url": "git@github.com:coreui/coreui-free-react-admin-template.git"
+  },
+  "license": "MIT",
+  "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
+  "scripts": {
+    "build": "vite build",
+    "lint": "eslint",
+    "serve": "vite preview",
+    "start": "vite"
   },
   "dependencies": {
-    "@emotion/cache": "11.11.0",
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "5.11.16",
-    "@mui/material": "^5.14.12",
-    "@mui/styled-engine": "5.12.3",
-    "@mui/styled-engine-sc": "^5.14.12",
-    "@testing-library/jest-dom": "5.16.5",
-    "@testing-library/react": "14.0.0",
-    "@testing-library/user-event": "14.4.3",
-    "axios": "^1.5.1",
-    "chart.js": "3.9.1",
-    "chroma-js": "2.4.2",
-    "cors": "^2.8.5",
-    "prop-types": "15.8.1",
-    "react": ">=16.8.0",
-    "react-chartjs-2": "3.0.5",
-    "react-countup": "6.4.2",
-    "react-dom": ">=16.8.0",
-    "react-flatpickr": "3.10.13",
-    "react-router-dom": "6.11.1",
-    "react-scripts": "5.0.1",
-    "sequelize": "^6.33.0",
-    "styled-components": "^6.0.8",
-    "stylis": "4.2.0",
-    "stylis-plugin-rtl": "2.1.1",
-    "uuid": "9.0.0",
-    "web-vitals": "3.3.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
-    "install:peer-deps": "npm install --legacy-peer-deps"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "@coreui/chartjs": "^4.1.0",
+    "@coreui/coreui": "^5.3.1",
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-react": "^2.3.0",
+    "@coreui/react": "^5.5.0",
+    "@coreui/react-chartjs": "^3.0.0",
+    "@coreui/utils": "^2.0.2",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/modifiers": "^9.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@hello-pangea/dnd": "^18.0.1",
+    "@popperjs/core": "^2.11.8",
+    "@reduxjs/toolkit": "^2.8.2",
+    "array-move": "^4.0.0",
+    "axios": "^1.8.4",
+    "chart.js": "^4.4.7",
+    "classnames": "^2.5.1",
+    "core-js": "^3.40.0",
+    "crypto-browserify": "^3.12.1",
+    "dotenv": "^16.4.7",
+    "jwt-decode": "^4.0.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.5.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.1.5",
+    "react-scripts": "^5.0.1",
+    "react-select": "^5.10.1",
+    "redux": "5.0.1",
+    "redux-persist": "^6.0.0",
+    "simplebar-react": "^3.3.0"
   },
   "devDependencies": {
-    "eslint": "8.40.0",
-    "eslint-config-prettier": "8.8.0",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-prettier": "4.2.1",
-    "eslint-plugin-react": "7.32.2",
-    "eslint-plugin-react-hooks": "4.6.0",
-    "prettier": "2.8.8"
-  },
-  "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
-  },
-  "overrides": {
-    "svgo": "3.0.2"
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "dotenv-webpack": "^8.1.0",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "globals": "^15.15.0",
+    "postcss": "^8.5.2",
+    "prettier": "3.5.1",
+    "rollup": "^4.39.0",
+    "sass": "^1.85.0",
+    "vite": "^6.1.0",
+    "webpack": "^5.99.5",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
   }
 }

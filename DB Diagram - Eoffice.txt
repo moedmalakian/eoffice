@@ -1,0 +1,124 @@
+Table user {
+use_id integer [primary key]
+emp_id integer
+rol_id integer
+username integer
+password md5
+status varchar
+created_date timestamp
+created_by varchar
+}
+
+Table role {
+rol_id integer [primary key]
+role_name varchar
+role_code varchar
+created_date timestamp
+created_by varchar
+}
+
+Table object {
+obj_id integer [primary key]
+object_name varchar
+access_name varchar
+link_url varchar
+folder_path varchar
+slug varchar
+component_name varchar
+is_menu boolean
+icon varchar
+parent_obj_id integer
+created_date timestamp
+created_by varchar
+status varchar
+}
+
+Table role_object {
+  rob_id integer [primary key]
+  obj_id integer
+  object_code varchar
+  rol_id integer
+  role_code varchar
+  created_date timestamp
+  created_by varchar
+}
+
+Table employee {
+  emp_id integer [primary key]
+  fullname varchar
+  gender varchar
+  birthday date
+  family varchar
+  pos_id integer
+  div_id integer
+  email varchar
+  phone varchar
+  address varchar
+  status varchar
+  created_date timestamp
+  created_by varchar
+}
+
+Table division {
+  div_id integer [primary key]
+  division_code varchar
+  division_name varchar
+  created_date timestamp
+  created_by varchar
+}
+
+Table position {
+  pos_id integer [primary key]
+  position_code varchar
+  position_name varchar
+  created_date timestamp
+  created_by varchar
+}
+
+Table attendance {
+  att_id integer [primary key]
+  use_id integer
+  emp_id integer
+  pos_id integer
+  div_id integer
+  start_date timestamp
+  end_date timestamp
+  attendance varchar
+  att_type varchar
+  location varchar
+  latitude decimal
+  longitude decimal
+  remarks varchar
+  activity varchar
+  qty integer
+  created_date timestamp
+  created_by varchar
+}
+
+// User <> Role
+Ref: user.rol_id <> role.rol_id
+
+// Role <> Role Object
+Ref: role.rol_id <> role_object.rol_id
+
+// Role Object <> Object
+Ref: role_object.obj_id <> object.obj_id
+
+// Employee <> Division
+Ref: employee.div_id <> division.div_id
+
+// Employee <> Position
+Ref: employee.pos_id <> position.pos_id
+
+// Attendance <> Employee
+Ref: attendance.emp_id <> employee.emp_id
+
+// Attendance <> User 
+Ref: attendance.use_id <> user.use_id
+
+// Attendance <> Division
+Ref: attendance.div_id <> division.div_id
+
+// Attendance <> Position
+Ref: attendance.pos_id <> position.pos_id
+

@@ -1,0 +1,142 @@
+Master Data
+├── Employee ✅
+│    ├── List of Employees
+│    ├── Add Employee
+│    ├── Edit Employee
+│    ├── Delete Employee
+├── Division ✅
+│    ├── List of Divisions
+│    ├── Add Division
+│    ├── Edit Division
+│    ├── Delete Division
+├── Position ✅
+│    ├── List of Positions
+│    ├── Add Position
+│    ├── Edit Position
+│    ├── Delete Position
+├── User ✅
+│    ├── List of Users
+│    ├── Add User
+│    ├── Edit User
+│    ├── Delete User
+├── Role ✅
+│    ├── List of Roles
+│    ├── Add Role
+│    ├── Edit Role
+│    ├── Delete Role
+│    ├── Role Access
+├── Object ✅
+│    ├── List of System Objects
+│    ├── Add Object
+│    ├── Edit Object
+│    ├── Delete Object
+│    ├── Copy Object
+├── Reference
+│    ├── Manage Lookup Data
+
+Attendance ✅
+├── Daily Attendance
+│    ├── Clock In/Clock Out
+│    ├── Manual Adjustment Request
+├── Attendance History
+│    ├── List per Employee
+│    ├── Filter by Date
+├── Attendance Approval
+│    ├── Pending Manual Attendance
+
+Payroll
+├── Salary Calculation
+│    ├── Monthly Payroll List
+│    ├── Bonus/THR Calculation
+├── Payroll Settings
+│    ├── Salary Structure Setup
+│    ├── BPJS and Tax Settings
+├── Payroll Reports
+│    ├── Export Slip Gaji
+│    ├── Payroll History
+
+On Leave
+├── Leave Request
+│    ├── Apply for Leave
+│    ├── My Leave History
+├── Leave Approval
+│    ├── Manager Approval List
+├── Leave Balance
+│    ├── View Remaining Leave
+
+Outgoing Work
+├── Request Outgoing Work
+│    ├── Destination, Purpose, Dates
+├── Outgoing Work History
+│    ├── My Requests
+│    ├── Team Requests
+
+Overtime
+├── Overtime Request
+│    ├── Apply for Overtime
+│    ├── Overtime Reason
+├── Overtime Approval
+│    ├── Manager Approval
+├── Overtime Reports
+│    ├── List by Employee / Division
+
+Events
+├── Company Events Calendar
+│    ├── List of Events
+│    ├── RSVP to Event
+├── Event Management (Admin)
+│    ├── Create / Edit Event
+
+Recruitment
+├── Open Positions
+│    ├── Add New Job
+│    ├── List Jobs
+├── Applicants
+│    ├── List of Applicants
+│    ├── Application Stages
+│    ├── Schedule Interview
+
+Performance Management
+├── Set Employee KPI
+├── Mid-Year Review
+├── Year-End Review
+├── Feedback (Manager & Peer)
+
+Asset Management
+├── List of Assets
+│    ├── Assign Asset to Employee
+│    ├── Track Asset Status
+├── Asset Maintenance
+
+Document Management
+├── Upload Documents
+├── View / Search Documents
+├── Approval Workflow (optional)
+
+Helpdesk
+├── Create New Ticket
+├── My Tickets
+├── Ticket Approval (Admin/IT)
+
+Travel & Expense
+├── Submit Expense Claim
+├── Expense Approval
+├── Expense Report
+
+System Settings
+├── Company Information
+├── Holiday Calendar
+├── Working Hours
+├── Notification Settings
+
+Dashboard
+├── Attendance Summary
+├── Payroll Summary
+├── Leave Statistics
+├── Overtime Summary
+├── Employee Distribution (by Division/Position)
+
+
+User Login
+U: eoffice / dewiwandhani
+P: pass123 / pass123
