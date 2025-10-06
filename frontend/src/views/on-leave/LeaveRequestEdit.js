@@ -17,12 +17,30 @@ import {
 } from '@coreui/react'
 import { useToast } from '../../utils/toastUtils'
 import { fetchReferenceList } from '../../services/referenceService'
-import { getObjectLink } from '../../utils/permissionUtils'
+import { getObjectLink, ensureAccessHydrated, hasAccessSync } from '../../utils/permissionUtils'
 
 const LeaveRequestEdit = () => {
   const { onlId } = useParams()
   const navigate = useNavigate()
   const { showSuccessUpdateToast, showErrorUpdateToast } = useToast()
+
+  // permissionUtils
+  const [accessReady, setAccessReady] = useState(false)
+  const [canEdit, setCanEdit] = useState(false)
+
+  // ensureAccessHydrated
+  useEffect(() => {
+    const ready = ensureAccessHydrated()
+    setAccessReady(ready)
+    setCanEdit(hasAccessSync('LeaveRequestEdit'))
+  }, [])
+
+  useEffect(() => {
+    if (accessReady && !canEdit) {
+      const url = getObjectLink('LeaveRequestList')
+      navigate(url || '/')
+    }
+  }, [accessReady, canEdit, navigate])
 
   const [formData, setFormData] = useState({
     useId: '',
@@ -236,7 +254,7 @@ const LeaveRequestEdit = () => {
             <CButton
               color="secondary"
               className="ms-2"
-              onClick={() => navigate('/on-leave/request')}
+              onClick={() => navigate(getObjectLink('LeaveRequestList') || '/')}
             >
               Cancel
             </CButton>

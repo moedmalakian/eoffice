@@ -15,12 +15,24 @@ import {
 } from '@coreui/react'
 import { formatDate, formatDateWithTime } from '../../utils/formatDateUtils'
 import { useToast } from '../../utils/toastUtils'
+import { getObjectLink, ensureAccessHydrated, hasAccessSync } from '../../utils/permissionUtils'
 
 const LeaveRequestDetail = () => {
   const { onlId } = useParams()
   const navigate = useNavigate()
   const [leave, setLeave] = useState(null)
   const [loading, setLoading] = useState(true)
+
+  // permissionUtils
+  const [accessReady, setAccessReady] = useState(false)
+  const [canDetail, setCanDetail] = useState(false)
+
+  // ensureAccessHydrated
+  useEffect(() => {
+    const ready = ensureAccessHydrated()
+    setAccessReady(ready)
+    setCanDetail(hasAccessSync('LeaveRequestDetail'))
+  }, [])
 
   useEffect(() => {
     const loadData = async () => {
@@ -34,7 +46,7 @@ const LeaveRequestDetail = () => {
       }
     }
     loadData()
-  }, [onlId])
+  }, [])
 
   if (loading) return <CSpinner color="primary" />
   if (!leave) return <p>Leave request not found</p>
@@ -109,9 +121,13 @@ const LeaveRequestDetail = () => {
               <CFormInput value={formatDateWithTime(leave.createdDate)} disabled />
             </CCol>
           </CRow>
-          <Link to="/on-leave/request" className="btn btn-secondary ms-2">
+          <CButton
+            color="secondary"
+            className="ms-2"
+            onClick={() => navigate(getObjectLink('LeaveRequestList') || '/')}
+          >
             Back
-          </Link>
+          </CButton>
         </CCardBody>
       </CCard>
     </div>
