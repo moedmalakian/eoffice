@@ -15,7 +15,7 @@ router.delete(
 router.put(
   "/:onlId/approval",
   authenticateToken,
-  onLeaveController.approveLeaveRequest
+  onLeaveController.approvalLeaveRequest
 );
 
 module.exports = router;

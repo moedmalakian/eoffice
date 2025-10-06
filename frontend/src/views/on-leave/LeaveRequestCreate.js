@@ -53,7 +53,7 @@ const LeaveRequestCreate = () => {
     }))
   }, [])
 
-  // Load Reference: Type
+  // Load Reference: On Leave Type
   const [typeOptions, setTypeOptions] = useState([])
 
   useEffect(() => {
@@ -164,7 +164,7 @@ const LeaveRequestCreate = () => {
                 </CFormSelect>
               </CCol>
               <CCol md={3}>
-                <CFormLabel>Quantity (Days)</CFormLabel>
+                <CFormLabel>Quantity</CFormLabel>
                 <CFormInput name="qty" value={formData.qty} disabled />
               </CCol>
               <CCol md={3}>
@@ -218,7 +218,11 @@ const LeaveRequestCreate = () => {
             <CButton color="primary" type="submit">
               Submit
             </CButton>
-            <CButton color="secondary" className="ms-2" onClick={() => navigate('/on-leave')}>
+            <CButton
+              color="secondary"
+              className="ms-2"
+              onClick={() => navigate('/on-leave/request')}
+            >
               Cancel
             </CButton>
           </CForm>

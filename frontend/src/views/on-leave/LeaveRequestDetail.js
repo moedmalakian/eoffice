@@ -50,15 +50,15 @@ const LeaveRequestDetail = () => {
           <CRow className="mb-3">
             <CCol md={4}>
               <CFormLabel>Full Name</CFormLabel>
-              <CFormInput value={leave.empId} disabled />
+              <CFormInput value={leave.fullName} disabled />
             </CCol>
             <CCol md={4}>
               <CFormLabel>Position</CFormLabel>
-              <CFormInput value={leave.posId} disabled />
+              <CFormInput value={leave.positionName} disabled />
             </CCol>
             <CCol md={4}>
               <CFormLabel>Division</CFormLabel>
-              <CFormInput value={leave.divId} disabled />
+              <CFormInput value={leave.divisionName} disabled />
             </CCol>
           </CRow>
 
@@ -109,7 +109,7 @@ const LeaveRequestDetail = () => {
               <CFormInput value={formatDateWithTime(leave.createdDate)} disabled />
             </CCol>
           </CRow>
-          <Link to="/on-leave" className="btn btn-secondary ms-2">
+          <Link to="/on-leave/request" className="btn btn-secondary ms-2">
             Back
           </Link>
         </CCardBody>

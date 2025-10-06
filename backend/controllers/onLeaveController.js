@@ -4,10 +4,14 @@ const moment = require("moment");
 // Helper on leave data formatter
 const formatLeaveRequest = (data) => ({
   onlId: data.onl_id,
-  empId: data.emp_id,
   useId: data.use_id,
+  username: data.username,
+  empId: data.emp_id,
+  fullName: data.fullname,
   posId: data.pos_id,
+  positionName: data.position_name,
   divId: data.div_id,
+  divisionName: data.division_name,
   startDate: moment(data.start_date).format("YYYY-MM-DD"),
   endDate: moment(data.end_date).format("YYYY-MM-DD"),
   qty: data.qty,
@@ -19,33 +23,60 @@ const formatLeaveRequest = (data) => ({
   createdBy: data.created_by,
 });
 
-// Get All Leave
+// Helper to build search query
+const buildSearchQuery = (search) => {
+  if (!search) return { where: "", values: [] };
+  const q = `%${search}%`;
+  return {
+    where: `WHERE (
+      e.fullname LIKE ? OR 
+      u.username LIKE ? OR 
+      ol.onl_type LIKE ? OR 
+      ol.remarks LIKE ?
+    )`,
+    values: [q, q, q, q],
+  };
+};
+
+// Get All On Leave
 exports.getAllLeaveRequests = async (req, res) => {
   const { page = 1, limit = 10, search = "" } = req.query;
   const currentPage = parseInt(page, 10);
   const limitValue = parseInt(limit, 10);
 
-  const searchQuery = search
-    ? `WHERE emp_id LIKE ? OR onl_type LIKE ? OR remarks LIKE ?`
-    : "";
-  const searchValues = search
-    ? [`%${search}%`, `%${search}%`, `%${search}%`]
-    : [];
+  const { where, values } = buildSearchQuery(search);
 
   try {
-    const countSql = `SELECT COUNT(*) AS totalItems FROM on_leave ${searchQuery}`;
-    const [countRows] = await db.query(countSql, searchValues);
+    const countSql = `
+      SELECT COUNT(*) AS totalItems
+      FROM on_leave ol
+      LEFT JOIN employee e ON ol.emp_id = e.emp_id
+      LEFT JOIN division d ON ol.div_id = d.div_id
+      LEFT JOIN position p ON ol.pos_id = p.pos_id
+      LEFT JOIN user u ON ol.use_id = u.use_id
+      ${where}
+    `;
+    const [countRows] = await db.query(countSql, values);
     const totalItems = countRows[0].totalItems;
     const totalPages = Math.ceil(totalItems / limitValue);
 
     const sql = `
-      SELECT * FROM on_leave
-      ${searchQuery}
-      ORDER BY created_date DESC
+      SELECT ol.onl_id, ol.use_id, u.username, ol.emp_id, e.fullname, 
+             ol.div_id, d.division_name, ol.pos_id, p.position_name,
+             ol.start_date, ol.end_date, ol.qty, ol.onl_type, 
+             ol.activity, ol.remarks, ol.status, ol.created_date, ol.created_by
+      FROM on_leave ol
+      LEFT JOIN employee e ON ol.emp_id = e.emp_id
+      LEFT JOIN division d ON ol.div_id = d.div_id
+      LEFT JOIN position p ON ol.pos_id = p.pos_id
+      LEFT JOIN user u ON ol.use_id = u.use_id
+      ${where}
+      ORDER BY ol.created_date DESC
       LIMIT ? OFFSET ?
     `;
+
     const [rows] = await db.query(sql, [
-      ...searchValues,
+      ...values,
       limitValue,
       (currentPage - 1) * limitValue,
     ]);
@@ -126,13 +157,26 @@ exports.getLeaveRequestById = async (req, res) => {
   const { onlId } = req.params;
 
   try {
-    const sql = `SELECT * FROM on_leave WHERE onl_id = ?`;
+    const sql = `
+      SELECT ol.onl_id, ol.use_id, u.username, ol.emp_id, e.fullname, 
+             ol.div_id, d.division_name, ol.pos_id, p.position_name,
+             ol.start_date, ol.end_date, ol.qty, ol.onl_type, 
+             ol.activity, ol.remarks, ol.status, ol.created_date, ol.created_by
+      FROM on_leave ol
+      LEFT JOIN employee e ON ol.emp_id = e.emp_id
+      LEFT JOIN division d ON ol.div_id = d.div_id
+      LEFT JOIN position p ON ol.pos_id = p.pos_id
+      LEFT JOIN user u ON ol.use_id = u.use_id
+      WHERE ol.onl_id = ?
+    `;
+
     const [rows] = await db.query(sql, [onlId]);
 
     if (rows.length === 0) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Leave request not found" });
+      return res.status(404).json({
+        success: false,
+        message: "Leave request not found",
+      });
     }
 
     return res.status(200).json({
@@ -142,9 +186,10 @@ exports.getLeaveRequestById = async (req, res) => {
     });
   } catch (err) {
     console.error("Error fetching leave request:", err);
-    return res
-      .status(500)
-      .json({ success: false, message: "Failed to retrieve leave request" });
+    return res.status(500).json({
+      success: false,
+      message: "Failed to retrieve leave request",
+    });
   }
 };
 
@@ -156,7 +201,7 @@ exports.updateLeaveRequest = async (req, res) => {
   try {
     const sql = `
       UPDATE on_leave
-      SET start_date = ?, end_date = ?, qty = ?, onl_type = ?, activity = ?, remarks = ?, activity = 'UPDATE'
+      SET start_date = ?, end_date = ?, qty = ?, onl_type = ?, activity = ?, remarks = ?
       WHERE onl_id = ? AND status = 'DRAFT'
     `;
     const [result] = await db.query(sql, [
@@ -214,7 +259,7 @@ exports.deleteLeaveRequest = async (req, res) => {
 };
 
 // Approval
-exports.approveLeaveRequest = async (req, res) => {
+exports.approvalLeaveRequest = async (req, res) => {
   const { onlId } = req.params;
   const { status, remarks } = req.body;
   const approvedBy = req.user?.username || "UNKNOWN";
@@ -227,7 +272,7 @@ exports.approveLeaveRequest = async (req, res) => {
     const sql = `
       UPDATE on_leave
       SET status = ?, remarks = ?, activity = 'APPROVAL'
-      WHERE onl_id = ? AND status = 'PENDING'
+      WHERE onl_id = ? AND status = 'DRAFT'
     `;
     const [result] = await db.query(sql, [status, remarks, onlId]);
 
